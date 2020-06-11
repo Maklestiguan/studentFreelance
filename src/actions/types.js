@@ -1,0 +1,47 @@
+export const AUTH_START = 'AUTH_START';
+
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+
+export const AUTH_FAIL = 'AUTH_FAIL';
+
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
+export const USER_LOADING = 'USER_LOADING';
+
+export const USER_LOADED = 'USER_LOADED';
+
+export const USER_ERROR = 'USER_ERROR';
+
+export const JOB_LIST_LOADING = 'JOB_LIST_LOADING';
+
+export const JOB_LIST_LOADED = 'JOB_LIST_LOADED';
+
+export const JOB_LIST_ERROR = 'JOB_LIST_ERROR';
+
+export const JOB_ADDED = 'JOB_ADDED';
+
+export const JOB_DETAIL_LOADING = 'JOB_DETAIL_LOADING';
+
+export const JOB_DETAIL_LOADED = 'JOB_DETAIL_LOADED';
+
+export const JOB_DETAIL_ERROR = 'JOB_DETAIL_ERROR';
+
+export const FREELANCER_LIST_LOADING = 'FREELANCER_LIST_LOADING';
+
+export const FREELANCER_LIST_LOADED = 'FREELANCER_LIST_LOADED';
+
+export const FREELANCER_LIST_ERROR = 'FREELANCER_LIST_ERROR';
+
+export const PROFILE_LOADING = 'PROFILE_LOADING';
+
+export const PROFILE_LOADED = 'PROFILE_LOADED';
+
+export const PROFILE_ERROR = 'PROFILE_ERROR';
+
+export const DISPLAY_MESSAGE = 'DISPLAY_MESSAGE';
+
+export const PAYMENT_START = 'PAYMENT_START';
+
+export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS';
+
+export const PAYMENT_ERROR = 'PAYMENT_ERROR';
