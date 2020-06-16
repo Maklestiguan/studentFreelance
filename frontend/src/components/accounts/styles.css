@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=cyrillic');
+.footer-login {
+  background: #00BAFF;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.footer-text {
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
+  color: white;
+}
+
+.footer-link {
+  font-size: 22px;
+  line-height: 22px;
+  font-weight: 800;
+  text-align: center;
+  color: white;
+}
+
+.profile-link {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 800;
+  font-style: bold;
+  text-align: center;
+}
+
+.button-login {
+  height: 60px;
+  width: 180px;
+  border: 2px solid #00BAFF!important;
+  background: white!important;
+  border-radius: 100px!important;
+
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 28px;
+  text-align: center;
+  text-transform: none;
+  color: #00BAFF;
+}
+
+.small-btn {
+  width: 50px;
+  height: 25px;
+}
+
+.medium-btn {
+  width: 70px;
+  height: 30px;
+}
+
+.big-btn {
+  width: 225px;
+  height: 60px;
+}
+
+.freelancers-list-item {
+  vertical-align: middle!important;
+  text-align: left!important;
+
+  font-family: "Montserrat", sans-serif!important;
+  font-style: normal!important;
+  font-weight: normal!important;
+  font-size: 22px!important;
+  line-height: 22px!important;
+  color: black!important;
+}
+
+.freelancers-list-cost-item {
+  vertical-align: middle!important;
+  text-align: right!important;
+
+  font-family: "Montserrat", sans-serif!important;
+  font-style: normal!important;
+  font-weight: 400!important;
+  font-size: 24px!important;
+  line-height: 24px!important;
+  color: black!important;
+}
+
+.not-frilancer-btn {
+  /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.35); */
+  background: rgb(8, 151, 202)!important;
+  border-radius: 100px!important;
+
+  font-family: "Montserrat", sans-serif;
+  font-style: bold;
+  font-weight: 800;
+  font-size: 14px!important;
+  line-height: 14px!important;
+  text-align: center;
+  text-transform: none;
+  color: #FFFFFF;
+}
+
+.find-by-filter-btn {
+  /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.35); */
+  background: #00BAFF!important;
+  border-radius: 10px!important;
+
+  font-family: "Montserrat", sans-serif;
+  font-style: bold;
+  font-weight: 800;
+  font-size: 14px!important;
+  line-height: 14px!important;
+  text-align: center;
+  text-transform: none;
+  color: #FFFFFF;
+}
+
+.grey-back {
+  background-color: #E5E5E5;
+}
+
+.white-back-profile {
+  background-clip: content-box;
+  background-color: white;
+}
+
+.overall-info {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-style: bold;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.tableFixHead { overflow-y: auto; height: 100px; }
+.tableFixHead thead th { position: sticky; top: 0; }
