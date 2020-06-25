@@ -4,9 +4,9 @@ from django.core.exceptions import PermissionDenied
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
-from .models import Job
+from .models import Job, SupportTicket
 from .permissions import IsOwnerOrReadOnly
-from .serializers import JobSerializer
+from .serializers import JobSerializer, SupportTicketSerializer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -20,6 +20,12 @@ class JobListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class SupportTicketCreateView(generics.ListCreateAPIView):
+    serializer_class = SupportTicketSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
 
 
 class JobDetailEditDeleteView(generics.RetrieveUpdateDestroyAPIView):

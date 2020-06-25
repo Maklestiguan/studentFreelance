@@ -2,7 +2,7 @@ from rest_framework import fields, serializers
 
 from accounts.serializers import UserSerializer
 from choices import TECHNOLOGIES
-from .models import Job
+from .models import Job, SupportTicket
 
 
 class JobSerializer(serializers.ModelSerializer):
@@ -32,3 +32,9 @@ class JobSerializer(serializers.ModelSerializer):
         if obj.freelancer:
             return UserSerializer(obj.freelancer).data
         return None
+
+class SupportTicketSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SupportTicket
+        fields = '__all__'
