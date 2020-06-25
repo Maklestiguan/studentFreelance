@@ -17,6 +17,7 @@ import Payment from './jobs/Payment';
 import FreelancerList from  './accounts/FreelancerList';
 import Profile from './accounts/Profile';
 import ProfileEdit from './accounts/ProfileEdit';
+import SupportForm from './common/SupportForm';
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
             <Route exact path="/register" component={Register} />
             <Route exact path="/" component={MainPage} />
             <Route exact path="/jobs" component={JobList} />
+            <Route exact path="/jobs/support" component={SupportForm} />
             <Route exact path="/jobs/:id" component={JobDetail} />
             <PrivateRoute exact path="/job-form" component={JobForm} />
             <PrivateRoute exact path="/payment" component={Payment} />

@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
-import { MDBContainer, MDBRow, MDBCol, MDBIcon, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';

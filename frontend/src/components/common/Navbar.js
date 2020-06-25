@@ -23,7 +23,7 @@ const Navbar = props => {
       <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
         <MDBNavbarNav right>
           <MDBNavItem>
-            <MDBNavLink className="NavBarLink NavBarButton" to="/">Помощь</MDBNavLink>
+            <MDBNavLink className="NavBarLink NavBarButton" to="/jobs/support">Помощь</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
             <MDBNavLink className="NavBarLink NavBarButton" to="/freelancers">Наставники</MDBNavLink>
