@@ -15,8 +15,25 @@ class JobListCreateView(generics.ListCreateAPIView):
     serializer_class = JobSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def get_queryset(self):
-        return Job.objects.filter(taken=False).order_by('-timestamp')
+    def get_queryset(self,):
+        jobs = Job.objects.filter(taken=False).order_by('-timestamp')
+        disciplines = self.request.query_params.get('disciplines', None)
+        # cities = self.request.query_params.get('cities', None)
+        # univercities = self.request.query_params.get('univercities', None)
+
+        results = []
+        
+        for job in jobs:
+            if disciplines is not None:
+                disciplines = disciplines.split('/')
+                for entry in job.__str__().split(','):
+                    print(entry)
+                    if entry in disciplines:
+                        results.append(job)
+            else:
+                return jobs
+        
+        return list(set(results))
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

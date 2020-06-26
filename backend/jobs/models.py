@@ -19,9 +19,13 @@ class Job(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     taken = models.BooleanField(default=False)
     done = models.BooleanField(default=False)
+    files = models.FileField(blank=True, upload_to='documents/%Y/%m/%d/')
 
     def __str__(self):
-        return self.summary
+        tech = []
+        for t in self.technologies:
+            tech.append(t)
+        return ','.join(tech)
 
 class SupportTicket(models.Model):
     name = models.CharField(max_length=50)
