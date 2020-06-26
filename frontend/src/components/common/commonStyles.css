@@ -143,7 +143,7 @@
   text-align: center;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -205,4 +205,12 @@
   font-size: 18px!important;
   line-height: 18px!important;
   font-weight: 600!important;
+}
+
+.show {
+  transition: opacity 5000ms;
+}
+
+.fade {
+  transition: opacity 5000ms;
 }

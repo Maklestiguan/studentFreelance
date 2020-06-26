@@ -12,8 +12,11 @@ const Job = props => {
     <MDBCard>
       <MDBCardBody className="position-relative">
         <div className="flex-item-equal-half-no-center">
-          <span className="text-our-advantages">Автор: {user}</span>
-          <MDBCardTitle>{summary} || {technologies_display}</MDBCardTitle>
+          <MDBCardTitle className="text-left">
+            {user} <br></br>
+            Описание: {summary}<br></br>
+            Дисциплины: {technologies_display}<br></br>
+          </MDBCardTitle>
           <span
             className="position-absolute text-muted"
             style={{ top: "25px", right: "28px" }}

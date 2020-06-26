@@ -74,8 +74,8 @@ const JobDetail = props => {
                 </Link>
                 {isOwner &&
                   <React.Fragment>
-                    {paymentVisible ? 
-                  <Payment job={props.jobDetail.job} /> : 
+                    {paymentVisible ?
+                  <Payment job={props.jobDetail.job} /> :
                   <MDBBtn size="bg" color='deep-orange' onClick={setPaymentVisible}>
                     Оплатить
                   </MDBBtn>

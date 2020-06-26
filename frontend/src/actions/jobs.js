@@ -14,9 +14,10 @@ import { jobListCreateUrl, jobDetailEditDeleteUrl, applyForJobUrl } from '../end
 import { displayMessage } from './messages';
 
 
-export const loadJobList = () => dispatch => {
+export const loadJobList = (filter) => dispatch => {
   dispatch({ type: JOB_LIST_LOADING });
-  axios.get(jobListCreateUrl)
+  console.log(typeof filter);
+  axios.get(filter ? jobListCreateUrl + `?disciplines=${filter.join('/')}` : jobListCreateUrl)
     .then(response => dispatch({ type: JOB_LIST_LOADED, payload: response.data }))
     .catch(error => {
       dispatch({ type: JOB_LIST_ERROR });

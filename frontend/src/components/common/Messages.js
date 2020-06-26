@@ -1,6 +1,7 @@
 import React, { useState, useReducer, useEffect } from 'react';
-import { MDBAlert } from 'mdbreact';
+import { MDBAlert, MDBAnimation } from 'mdbreact';
 import { connect } from 'react-redux';
+import './commonStyles.css';
 
 
 const Messages = props => {
@@ -11,6 +12,7 @@ const Messages = props => {
     if (props.messages.color) {
       setVisible(true);
     }
+    setTimeout(setVisible, 9500, false)
   }, [props.messages]);
 
   let message;
@@ -34,9 +36,11 @@ const Messages = props => {
       {
         isVisible &&
           messages.map((message, index) => (
-            <MDBAlert color={props.messages.color} dismiss className="text-center" key={message.split(":")[0]}>
-              {message}
-            </MDBAlert>
+            <MDBAnimation delay="5s" type="fadeOut" duration="4s" >
+              <MDBAlert color={props.messages.color} dismiss className="text-center" key={message.split(":")[0]}>
+                {message}
+              </MDBAlert>
+            </MDBAnimation>
           ))
       }
     </>

@@ -36,33 +36,32 @@ const SupportForm = props => {
         <MDBCol md="6" className="offset-md-3">
           <MDBCard className="mt-5">
             <MDBCardBody>
-              <form onSubmit={handleSubmit}>
-                <p className="h4 text-center mb-4">Помощь</p>
+              <form className="was-validated" onSubmit={handleSubmit}>
+                <p className="h4 text-center mb-4">Обращение в поддержку</p>
                 <MDBInput
+                  id="nameToSupport"
                   label="Введите ваше имя"
+                  outline
                   icon="user"
-                  group
                   type="text"
-                  validate
-                  error="wrong"
-                  success="right"
                   name="name"
-                  value={name}
                   onChange={handleChange}
+                  value={name}
+                  required
                 />
                 <MDBInput
+                  id="emailToSupport"
                   label="Введите ваш email"
+                  outline
                   icon="envelope"
-                  group
                   type="email"
-                  validate
-                  error="wrong"
-                  success="right"
                   name="email"
                   value={email}
                   onChange={handleChange}
+                  required
                 />
                 <MDBInput
+                  id="descriptionToSupport"
                   type="textarea"
                   label="Опишите свою проблему"
                   rows="5"
@@ -70,6 +69,7 @@ const SupportForm = props => {
                   name="description"
                   value={description}
                   onChange={handleChange}
+                  required
                 />
                 <div className="text-center mt-4">
                   <MDBBtn className="job-confirm-btn" color="cyan" outline type="submit">
