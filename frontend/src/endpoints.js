@@ -38,6 +38,6 @@ export const jobListCreateUrl = endpoint + 'jobs/';
 
 export const jobDetailEditDeleteUrl = id => `${endpoint}jobs/${id}/`;
 
-export const supportTicketCreateUrl = endpoint + 'jobs/support/';
+export const supportTicketCreateUrl = endpoint + 'support/';
 
 export const applyForJobUrl = id => `${endpoint}jobs/${id}/apply-for-job/`;
