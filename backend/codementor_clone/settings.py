@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'multiselectfield',
 
-    'accounts',
-    'jobs',
-    'payments'
+    'accounts.apps.AccountsConfig',
+    'jobs.apps.JobsConfig',
+    'payments.apps.PaymentsConfig'
 ]
 
 MIDDLEWARE = [
@@ -160,5 +160,5 @@ CORS_ORIGIN_WHITELIST = (
 
 
 STRIPE_PUBLIC_KEY = 'pk_test_51GqiUhFjorVEK49kDd5p7VhjdcPzzg3rDNyFMMKpNTbwqbWvxJsVbVurENQOYh8RXz8pcjRs0P8bB54aNmiqOFZI00CToZLImP'
-STRIPE_SECRET_KEY = ''
+STRIPE_SECRET_KEY = 'sk_test_51GqiUhFjorVEK49kU9iiNsiT9i9bgcQoleLCghkbIH4z57hCSuYQYzzXuqFArbUT6CsJygCBNvAunJxrpq8LGASX00tyiig3XF'
 STRIPE_WEBHOOK_SECRET = ''
