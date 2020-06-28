@@ -120,17 +120,16 @@ class TimeZoneListView(views.APIView):
     def get(self, request, *args, **kwargs):
         return Response(TIME_ZONES, status.HTTP_200_OK)
 
+
 class CitiesListView(views.APIView):
     def get(self, request, *args, **kwargs):
         return Response(CITIES, status.HTTP_200_OK)
 
-# class AgesListView(views.APIView):
-#     def get(self, request, *args, **kwargs):
-#         return Response(AGES, status.HTTP_200_OK)
 
 class GendersListView(views.APIView):
     def get(self, request, *args, **kwargs):
         return Response(GENDERS, status.HTTP_200_OK)
+
 
 class UnivercitiesListView(views.APIView):
     def get(self, request, *args, **kwargs):
