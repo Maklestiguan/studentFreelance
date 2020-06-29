@@ -16,8 +16,7 @@ import { displayMessage } from './messages';
 
 export const loadJobList = (filter) => dispatch => {
   dispatch({ type: JOB_LIST_LOADING });
-  console.log(typeof filter);
-  axios.get(filter ? jobListCreateUrl + `?disciplines=${filter.join('/')}` : jobListCreateUrl)
+  axios.get(filter.length ? jobListCreateUrl + `?disciplines=${filter.join('/')}` : jobListCreateUrl)
     .then(response => dispatch({ type: JOB_LIST_LOADED, payload: response.data }))
     .catch(error => {
       dispatch({ type: JOB_LIST_ERROR });

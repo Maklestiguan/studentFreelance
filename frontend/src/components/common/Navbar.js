@@ -23,13 +23,13 @@ const Navbar = props => {
       <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
         <MDBNavbarNav right>
           <MDBNavItem>
-            <MDBNavLink className="NavBarLink NavBarButton" to="/jobs/support">Помощь</MDBNavLink>
+            <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to="/jobs/support">Помощь</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink className="NavBarLink NavBarButton" to="/freelancers">Наставники</MDBNavLink>
+            <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to="/freelancers">Наставники</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink className="NavBarLink NavBarButton" to="/jobs">Объявления</MDBNavLink>
+            <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to="/jobs">Объявления</MDBNavLink>
           </MDBNavItem>
           {/* <MDBNavItem>
             <MDBNavLink className="NavBarLink NavBarButton" to="/job-form">Добавить объявление</MDBNavLink>
@@ -38,19 +38,19 @@ const Navbar = props => {
             isAuthenticated ?
               <>
                 <MDBNavItem>
-                  <MDBNavLink className="NavBarLink NavBarButton" to={`/profile/${user.id}`}>Личный кабинет</MDBNavLink>
+                  <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to={`/profile/${user.id}`}>Личный кабинет</MDBNavLink>
                 </MDBNavItem>
-                {/* <MDBNavItem>
+                <MDBNavItem>
                   <MDBNavLink className="NavBarLink NavBarButton" to="#!" onClick={() => props.logout()}>Выйти</MDBNavLink>
-                </MDBNavItem> */}
+                </MDBNavItem>
               </>
             :
               <>
                 <MDBNavItem>
-                  <MDBNavLink className="NavBarLink NavBarButton" to="/login">Войти</MDBNavLink>
+                  <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to="/login">Войти</MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <MDBNavLink className="NavBarLink NavBarButton" to="/register">Регистрация</MDBNavLink>
+                  <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to="/register">Регистрация</MDBNavLink>
                 </MDBNavItem>
               </>
           }

@@ -108,6 +108,7 @@ const ProfileEdit = props => {
                       id="inputGroupFile01"
                       aria-describedby="inputGroupFileAddon01"
                       name="photo"
+                      onChange={handleChange}
                     />
                     <label className="custom-file-label" htmlFor="inputGroupFile01">
                       Изменить фото профиля

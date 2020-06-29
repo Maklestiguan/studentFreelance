@@ -56,10 +56,10 @@ const JobList = props => {
           label="ВУЗ"
         />
       </MDBCol>
-      <MDBCol middle className="col-md-1 text-left">
+      <MDBCol middle className="col-md-2 text-left">
         <MDBBtn className="find-by-filter-btn" color="cyan" type="submit">Найти</MDBBtn><br></br>
       </MDBCol>
-      <MDBCol middle className="col-md-3 text-left">
+      <MDBCol middle className="col-md-4 text-left">
         <MDBNavLink to="/job-form">
           <MDBBtn className="find-by-filter-btn" color="cyan" type="submit">Добавить объявление</MDBBtn>
         </MDBNavLink>

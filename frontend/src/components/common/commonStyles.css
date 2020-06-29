@@ -72,8 +72,8 @@
 }
 
 .NavBarButton:hover {
-  background: white;
-  color: #00BAFF;
+  background: white!important;
+  color: #00BAFF!important;
 }
 
 .NavBarLink {
