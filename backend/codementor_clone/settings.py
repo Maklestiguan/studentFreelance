@@ -131,7 +131,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # specifies the folder for uploaded image files
-MEDIA_URL = '/media/profile_images/'  # specifies url for the image folder
+MEDIA_URL = '/media/'  # specifies url for the image folder
 
 SITE_ID = 1
 
