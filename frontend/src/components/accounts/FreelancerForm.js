@@ -19,8 +19,8 @@ const FreelancerForm = props => {
   };
 
   return (
-    <MDBRow className="mb-4">
-      <MDBCol md="6" className="offset-md-3">
+    // <MDBRow className="mb-4">
+      <MDBCol md="6" className="offset-md-1">
         <MDBCard>
           <MDBCardBody>
             <form onSubmit={handleSubmit}>
@@ -51,7 +51,7 @@ const FreelancerForm = props => {
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
-    </MDBRow>
+    // </MDBRow>
   );
 };
 

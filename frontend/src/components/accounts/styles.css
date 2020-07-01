@@ -146,5 +146,16 @@
   line-height: 18px;
 }
 
+.overall-info-jobs {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-style: bold;
+  font-size: 18px;
+  line-height: 18px;
+  color: grey;
+  padding-bottom: 10px;
+  vertical-align: middle;
+}
+
 .tableFixHead { overflow-y: auto; height: 100px; }
 .tableFixHead thead th { position: sticky; top: 0; }

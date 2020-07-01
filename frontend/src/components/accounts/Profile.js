@@ -83,9 +83,10 @@ const Profile = props => {
               isOwner && job_requests.length > 0 &&
                 <JobStatusClient jobs={job_requests} />
             }
-            {/* <MDBCol md={8}>
-
-            </MDBCol> */}
+            {
+              isOwner && job_requests.length === 0 && !formIsVisible &&
+              <MDBCol className="text-center white-back-profile overall-info-jobs" md={9}>У вас нет активных объявлений о поиске Наставника</MDBCol>
+            }
           </MDBRow>
           <MDBRow>
             <MDBCol className="text-center white-back-profile overall-info" md={3}>
@@ -120,10 +121,14 @@ const Profile = props => {
                     </MDBBtn>
                 }
                 {isOwner && isFreelancer && <UnbecomeFreelancerButton className="not-frilancer-btn" />}
-              </MDBCol>
+            </MDBCol>
               {
                 isOwner && taken_jobs.length > 0 &&
                   <JobStatusFreelancer username={auth.user.username} jobs={taken_jobs} />
+              }
+              {
+                isOwner && taken_jobs.length === 0 && !formIsVisible &&
+                <MDBCol className="text-center white-back-profile overall-info-jobs" md={9}>У вас нет активных объявлений в роли Наставника</MDBCol>
               }
           </MDBRow>
         </MDBCardBody>
