@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { MDBRow, MDBCol, MDBBtn } from "mdbreact";
@@ -8,22 +8,25 @@ import { technologyListUrl, cityListUrl, univercityListUrl } from '../../endpoin
 import { loadFreelancerList } from '../../actions/profiles';
 import Freelancer from './Freelancer';
 
+const initialState = {
+  technologies: [],
+  city: [],
+  univercities: []
+};
 
 const FreelancerList = props => {
-
-  const initialState = {
-    technologies: [],
-    city: [],
-    univercities: []
-  };
-
-  useEffect(() => props.loadFreelancerList(), []);
 
   const [state, setState] = useReducer((state, updatedState) => ({...state, ...updatedState}), initialState);
 
   const { isLoading, freelancers } = props.freelancerList;
 
+  initialState.filteredFreelancers = freelancers;
+
   const { technologies, city, univercities } = state;
+
+  useEffect(() => props.loadFreelancerList(), []);
+  const handleSubmit = useCallback(() => props.loadFreelancerList(technologies, city, univercities), [technologies, city, univercities]);
+
   return (
     <>
     <MDBRow middle style={{"marginTop": "20px"}} className="offset-md-1">
@@ -55,7 +58,7 @@ const FreelancerList = props => {
         />
       </MDBCol>
       <MDBCol className="col-md-3 text-left">
-        <MDBBtn className="find-by-filter-btn" color="cyan" type="submit">Найти</MDBBtn><br></br>
+        <MDBBtn className="find-by-filter-btn" color="cyan" onClick={handleSubmit}>Найти</MDBBtn><br></br>
       </MDBCol>
     </MDBRow>
     <div>

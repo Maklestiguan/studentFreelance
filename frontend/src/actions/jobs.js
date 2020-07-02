@@ -14,9 +14,19 @@ import { jobListCreateUrl, jobDetailEditDeleteUrl, applyForJobUrl } from '../end
 import { displayMessage } from './messages';
 
 
-export const loadJobList = (filter) => dispatch => {
+export const loadJobList = (technologies, cities, univercities) => dispatch => {
   dispatch({ type: JOB_LIST_LOADING });
-  axios.get(filter.length ? jobListCreateUrl + `?disciplines=${filter.join('/')}` : jobListCreateUrl)
+  let filterQuery = "";
+  if (technologies && technologies.length) {
+    filterQuery += `?disciplines=${technologies.join('/')}`;
+  }
+  if (cities && cities.length) {
+    filterQuery += `?cities=${cities.join('/')}`;
+  }
+  if (univercities && univercities.length) {
+    filterQuery += `?univercities=${univercities.join('/')}`;
+  }
+  axios.get(filterQuery ? jobListCreateUrl + filterQuery : jobListCreateUrl)
     .then(response => dispatch({ type: JOB_LIST_LOADED, payload: response.data }))
     .catch(error => {
       dispatch({ type: JOB_LIST_ERROR });

@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer, useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { MDBRow, MDBCol, MDBBtn, MDBNavLink } from "mdbreact";
@@ -24,7 +24,8 @@ const JobList = props => {
 
   const { technologies, city, univercities } = state;
 
-  useEffect(() => props.loadJobList(technologies), [technologies]);
+  useEffect(() => props.loadJobList(), []);
+  const handleSubmit = useCallback(() => props.loadJobList(technologies, city, univercities), [technologies, city, univercities]);
 
   return (
     <>
@@ -35,7 +36,7 @@ const JobList = props => {
           setState={setState}
           url={technologyListUrl}
           fieldName="technologies"
-          label="Предметы"
+          label="Дисциплины"
         />
       </MDBCol>
       <MDBCol middle className="col-md-2 text-center">
@@ -56,8 +57,8 @@ const JobList = props => {
           label="ВУЗ"
         />
       </MDBCol>
-      <MDBCol middle className="col-md-2 text-left">
-        <MDBBtn className="find-by-filter-btn" color="cyan" type="submit">Найти</MDBBtn><br></br>
+      <MDBCol middle className="col-md-1 text-left">
+        <MDBBtn className="find-by-filter-btn" color="cyan" onClick={handleSubmit}>Найти</MDBBtn><br></br>
       </MDBCol>
       <MDBCol middle className="col-md-4 text-left">
         <MDBNavLink to="/job-form">

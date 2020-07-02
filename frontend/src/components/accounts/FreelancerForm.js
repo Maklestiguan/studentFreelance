@@ -32,6 +32,7 @@ const FreelancerForm = props => {
                   type="textarea"
                   rows="5"
                   validate
+                  maxLength="1000"
                   error="wrong"
                   success="right"
                   value={bio}
