@@ -31,7 +31,7 @@ const Register = props => {
   // redirect to add job page after logging in
   // which is done automatically on registering
   if (props.isAuthenticated) {
-    return <Redirect to="/job-form" />
+    return <Redirect to="/jobs" />
   }
 
   const { username, email, password1, password2 } = state;

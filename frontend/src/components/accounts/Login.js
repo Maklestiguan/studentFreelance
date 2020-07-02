@@ -18,7 +18,7 @@ const Login = props => {
 
   // redirect to add job page after successful login
   if (props.isAuthenticated) {
-    return <Redirect to="/job-form" />
+    return <Redirect to="/jobs" />
   }
 
   return (

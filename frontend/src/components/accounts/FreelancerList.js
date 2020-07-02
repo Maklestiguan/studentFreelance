@@ -29,8 +29,16 @@ const FreelancerList = props => {
 
   return (
     <>
-    <MDBRow middle style={{"marginTop": "20px"}} className="offset-md-1">
-      <MDBCol middle className="col-md-3 text-center">
+    <MDBRow 
+      middle       
+      style={{
+        "marginTop": "20px",
+        "backgroundColor": "#E5E5E5",
+        "margin-left": "0px",
+        "margin-right": "0px"
+        }}
+    >
+      <MDBCol middle className="col-md-2 offset-md-1 text-center">
         <MultiSelectField
           initialState={technologies}
           setState={setState}
@@ -61,14 +69,15 @@ const FreelancerList = props => {
         <MDBBtn className="find-by-filter-btn" color="cyan" onClick={handleSubmit}>Найти</MDBBtn><br></br>
       </MDBCol>
     </MDBRow>
-    <div>
+    <div style={{"backgroundColor": "#E5E5E5"}}>
         {freelancers.length > 0 && freelancers.map(
           freelancer => <Freelancer key={freelancer.id} freelancer={freelancer} />
         )}
+        <footer className="text-center" style={{ "backgroundColor": "#E5E5E5" }}>asd</footer>
       </div>
       {
         isLoading &&
-          <div className="my-5 text-center spinner-border" role="status">
+          <div className="offset-md-6 text-center spinner-border" role="status">
             <span className="sr-only">Loading...</span>
           </div>
       }

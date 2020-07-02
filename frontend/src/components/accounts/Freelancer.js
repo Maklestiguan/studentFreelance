@@ -9,9 +9,13 @@ const Freelancer = props => {
 
   return (
     <>
-    <MDBCol className="col-md-10 offset-md-1 text-center">
-      <MDBCard className="my-4">
-        <MDBCardBody>
+      <MDBCard className="col-md-10 offset-md-1 z-depth-0"
+      style={{
+        "marginBottom": "20px"
+        }}>
+        <MDBCardBody
+          border="default" 
+          className="position-relative z-depth-0">
           <MDBCardTitle className="text-left">{user.first_name} {user.last_name}
           </MDBCardTitle>
           <Link to={`/profile/${id}`}>
@@ -28,7 +32,6 @@ const Freelancer = props => {
           </MDBCardText>
         </MDBCardBody>
       </MDBCard>
-    </MDBCol>
     </>
   )
 };

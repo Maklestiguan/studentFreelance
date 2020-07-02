@@ -29,8 +29,16 @@ const JobList = props => {
 
   return (
     <>
-    <MDBRow middle style={{"marginTop": "20px"}} className="offset-md-1">
-      <MDBCol middle className="col-md-2 text-center">
+    <MDBRow
+      middle 
+      style={{
+        "marginTop": "20px",
+        "backgroundColor": "#E5E5E5",
+        "margin-left": "0px",
+        "margin-right": "0px"
+        }} 
+    >
+      <MDBCol middle className="col-md-2 offset-md-1 text-center">
         <MultiSelectField
           initialState={technologies}
           setState={setState}
@@ -57,23 +65,24 @@ const JobList = props => {
           label="ВУЗ"
         />
       </MDBCol>
-      <MDBCol middle className="col-md-1 text-left">
+      <MDBCol middle style={{"marginRight": "10px"}} className="col-md-1 text-left">
         <MDBBtn className="find-by-filter-btn" color="cyan" onClick={handleSubmit}>Найти</MDBBtn><br></br>
       </MDBCol>
-      <MDBCol middle className="col-md-4 text-left">
+      <MDBCol middle className="col-md-3 text-left">
         <MDBNavLink to="/job-form">
           <MDBBtn className="find-by-filter-btn" color="cyan" type="submit">Добавить объявление</MDBBtn>
         </MDBNavLink>
       </MDBCol>
     </MDBRow>
-      <div>
+      <div style={{"backgroundColor": "#E5E5E5"}}>
         {jobs.length > 0 && jobs.map(
           job => <Job key={job.id} job={job} />
         )}
+        <footer className="text-center" style={{ "backgroundColor": "#E5E5E5" }}>asd</footer>
       </div>
       {
         isLoading &&
-          <div className="my-5 text-center spinner-border" role="status">
+          <div className="offset-md-6 text-center spinner-border" role="status">
             <span className="sr-only">Loading...</span>
           </div>
       }
