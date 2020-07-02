@@ -18,21 +18,34 @@ class JobListCreateView(generics.ListCreateAPIView):
     def get_queryset(self,):
         jobs = Job.objects.filter(taken=False).order_by('-timestamp')
         disciplines = self.request.query_params.get('disciplines', None)
-        # cities = self.request.query_params.get('cities', None)
-        # univercities = self.request.query_params.get('univercities', None)
+        cities = self.request.query_params.get('cities', None)
+        univercities = self.request.query_params.get('univercities', None)
 
-        results = []
-        
-        for job in jobs:
-            if disciplines is not None:
-                disciplines = disciplines.split('/')
-                for entry in job.__str__().split(','):
-                    if entry in disciplines:
-                        results.append(job)
-            else:
-                return jobs
-        
-        return list(set(results))
+
+        if disciplines is None and cities is None and univercities is None:
+            return jobs
+        else:
+            results = []
+            for job in jobs:
+                fields = job.__getFilteredFields__()
+                to_be_added = True
+
+                if disciplines is not None:
+                    if not any(d in fields[0] for d in disciplines.split('/')):
+                        to_be_added = False
+
+                if cities is not None and to_be_added:
+                    if not any(c in fields[1] for c in cities.split('/')):
+                        to_be_added = False
+
+                if univercities is not None and to_be_added:
+                    if not any(u in fields[2] for u in univercities.split('/')):
+                        to_be_added = False
+
+                if to_be_added:
+                    results.append(job)
+
+            return list(set(results))
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -66,7 +79,6 @@ class ApplyForJobView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         user = request.user
         job = Job.objects.get(pk=self.kwargs['pk'])
-
         if hasattr(user.profile, 'freelancer') and not user == job.freelancer:
             if user in job.applicants.all():
                 job.applicants.remove(user)

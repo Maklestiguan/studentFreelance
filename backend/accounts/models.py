@@ -35,10 +35,25 @@ class Profile(models.Model):
 class Freelancer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     bio = models.TextField()
-    technologies = MultiSelectField(choices=TECHNOLOGIES)
+    technologies = MultiSelectField(choices=TECHNOLOGIES, blank=True)
+    cities = MultiSelectField(choices=CITIES, blank=True)
+    universities = MultiSelectField(choices=UNIVERSITIES, blank=True)
     stripe_account_id = models.CharField(max_length=50, blank=True, null=True)
     active = models.BooleanField(default=False)
     hour_rate = models.CharField(max_length=50, blank=True, null=True, default='Не указано')
 
     def __str__(self):
         return f'{self.profile.user} freelancer'
+
+    def __getFilteredFields__(self):
+        result = []
+        tech = []
+        cts = []
+        univ = []
+        for t in self.technologies:
+            tech.append(t)
+        for c in self.cities:
+            cts.append(c)
+        for u in self.universities:
+            univ.append(u)
+        return result.append(','.join(tech), ','.join(cts), ','.join(univ))
