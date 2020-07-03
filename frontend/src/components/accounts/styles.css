@@ -159,3 +159,7 @@
 
 .tableFixHead { overflow-y: auto; height: 100px; }
 .tableFixHead thead th { position: sticky; top: 0; }
+
+.input-font {
+  font-size: large!important;
+}

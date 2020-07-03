@@ -1,13 +1,14 @@
 import React, { useReducer, useState, useEffect } from 'react';
-import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
+import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBInputSelect } from 'mdbreact';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 
+import './styles.css';
 import { loadProfile, editProfile } from '../../actions/profiles';
 import MultiSelectField from '../common/MultiSelectField';
 import SelectField from '../common/SelectField';
-import { languageListUrl, technologyListUrl, timeZoneListUrl, cityListUrl, ageListUrl, gendersListUrl, univercityListUrl } from '../../endpoints';
+import { technologyListUrl, timeZoneListUrl, cityListUrl, gendersListUrl, univercityListUrl } from '../../endpoints';
 
 
 const ProfileEdit = props => {
@@ -22,11 +23,10 @@ const ProfileEdit = props => {
     photoUrl: '',
     social_accounts: '',
     time_zone: '',
-    languages: [],
     bio: '',
     technologies: [],
     city: '',
-    age: '',
+    univercity: '',
     gender: ''
   };
 
@@ -71,11 +71,9 @@ const ProfileEdit = props => {
           photoUrl: profile.photo,
           social_accounts: profile.social_accounts,
           time_zone: profile.time_zone,
-          languages: profile.languages,
           bio: profile.freelancer ? profile.freelancer.bio : '',
           technologies: profile.freelancer ? profile.freelancer.technologies : '',
           city: profile.city,
-          age: profile.age,
           gender: profile.gender
         })
       });
@@ -87,11 +85,11 @@ const ProfileEdit = props => {
     }
   }, [props.auth.user]);
 
-  const { id, username, email, first_name, last_name, photoUrl, social_accounts, time_zone, languages, bio, technologies, city, age, gender } = state;
+  const { id, username, email, first_name, last_name, photoUrl, social_accounts, time_zone, bio, technologies, city, univercity, gender } = state;
   console.log(state);
   return (
     <MDBRow>
-      <MDBCol md="6" className="offset-md-3">
+      <MDBCol md="8" className="offset-md-2">
         <MDBCard className="my-4">
           <MDBCardBody>
             <form onSubmit={handleSubmit}>
@@ -116,6 +114,7 @@ const ProfileEdit = props => {
                   </div>
                 </div>
                 <MDBInput
+                  labelClass="input-font"
                   label="Ваше имя пользователя"
                   group
                   type="text"
@@ -124,9 +123,10 @@ const ProfileEdit = props => {
                   success="right"
                   name="username"
                   value={username}
-                  onChange={handleChange}
+                  disabled
                 />
                 <MDBInput
+                labelClass="input-font"
                   label="Ваш email"
                   group
                   type="email"
@@ -138,6 +138,7 @@ const ProfileEdit = props => {
                   onChange={handleChange}
                 />
                 <MDBInput
+                  labelClass="input-font"
                   label="Ваше имя"
                   group
                   type="text"
@@ -149,6 +150,7 @@ const ProfileEdit = props => {
                   onChange={handleChange}
                 />
                 <MDBInput
+                  labelClass="input-font"
                   label="Ваша фамилия"
                   group
                   type="text"
@@ -160,27 +162,23 @@ const ProfileEdit = props => {
                   onChange={handleChange}
                 />
                 <SelectField
+                  labelClass="input-font"
+                  label="Ваш город"
                   initialState={city}
                   setState={setState}
                   url={cityListUrl}
                   fieldName="city"
-                  label="Ваш город"
                 />
-                {/* <SelectField
-                  initialState={age}
-                  setState={setState}
-                  url={timeZoneListUrl}
-                  fieldName="age"
-                  label="Ваш возраст"
-                /> */}
                 <SelectField
+                  labelClass="input-font"
+                  label="Ваш пол"
                   initialState={gender}
                   setState={setState}
                   url={gendersListUrl}
                   fieldName="gender"
-                  label="Ваш пол"
                 />
                 <MDBInput
+                  labelClass="input-font"
                   label="Соц. сети"
                   group
                   type="text"
@@ -192,22 +190,17 @@ const ProfileEdit = props => {
                   onChange={handleChange}
                 />
                 <SelectField
+                  labelClass="input-font"
+                  label="Ваш часовой пояс"
                   initialState={time_zone}
                   setState={setState}
                   url={timeZoneListUrl}
                   fieldName="time_zone"
-                  label="Ваш часовой пояс"
-                />
-                <MultiSelectField
-                  initialState={languages}
-                  setState={setState}
-                  url={languageListUrl}
-                  fieldName="languages"
-                  label="Какими вы владеете языками?"
                 />
                 {
                   state.freelancer &&
                     <MDBInput
+                      labelClass="input-font"
                       label="Ваш опыт"
                       group
                       type="textarea"
@@ -222,12 +215,31 @@ const ProfileEdit = props => {
                 }
                 {
                   state.freelancer &&
+                  <SelectField
+                    initialState={city}
+                    setState={setState}
+                    url={cityListUrl}
+                    fieldName="city"
+                    label="Ваш город"
+                  />
+                }
+                {
+                  state.freelancer &&
+                  <SelectField
+                    initialState={univercity}
+                    setState={setState}
+                    url={univercityListUrl}
+                    fieldName="univercity"
+                    label="Ваш ВУЗ"
+                  />
+                }
+                {
+                  state.freelancer &&
                     <MultiSelectField
                       initialState={technologies}
                       setState={setState}
                       url={technologyListUrl}
                       fieldName="technologies"
-                      label="Дисциплины с которыми вы готовы помочь"
                     />
                 }
               </div>

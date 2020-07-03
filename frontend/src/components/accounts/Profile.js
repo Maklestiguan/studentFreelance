@@ -64,7 +64,7 @@ const Profile = props => {
             </div>
         } */}
         <MDBCardTitle className="mt-3 text-center">
-          {user && user.first_name} {user && user.last_name} {isOwner && isFreelancer && '(Вы явялетесь наставником)'}
+          {user && user.first_name} {user && user.last_name} {isOwner && isFreelancer && '(Вы являетесь наставником)'}
         </MDBCardTitle>
         <MDBCardBody>
           <MDBRow>

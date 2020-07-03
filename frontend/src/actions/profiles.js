@@ -67,15 +67,14 @@ export const editProfile = (profile, history) => dispatch => {
   data.append('social_accounts', profile.social_accounts);
   data.append('time_zone', profile.time_zone);
   data.append('languages', profile.languages);
-  data.append('city', profile.city);
-  if (profile.age !== null) {
-    data.append('age', profile.age);
-  }
+  // data.append('city', profile.city);
   data.append('gender', profile.gender);
 
   if (profile.freelancer) {
     data.append('bio', profile.bio);
     data.append('technologies', profile.technologies);
+    data.append('city', profile.city);
+    data.append('univercity', profile.univercity)
     // data.append('hour_rate', profile.hour_rate)
   }
   axios.put(profileDetailEditDeleteUrl(profile.id), data, headers)
