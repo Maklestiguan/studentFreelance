@@ -46,6 +46,8 @@ const JobForm = props => {
       props.displayMessage('danger', 'Неверная дата завершения работ')
     } else if (state.budget < 1) {
       props.displayMessage('danger', "Некорректная сумма оплаты")
+    } else if (state.technologies.length < 0) {
+      props.displayMessage('danger', "Выберите по меньшей мере одну дисциплину")
     } else if (job) {
         props.editJob(job.id, state, props.history);
       } else {

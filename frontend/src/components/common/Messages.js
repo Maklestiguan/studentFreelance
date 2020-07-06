@@ -36,7 +36,7 @@ const Messages = props => {
       {
         isVisible &&
           messages.map((message, index) => (
-            <MDBAnimation delay="5s" type="fadeOut" duration="4s" >
+            <MDBAnimation delay="5s" type="fadeOut" duration="2s" >
               <MDBAlert color={props.messages.color} dismiss className="text-center" key={message.split(":")[0]}>
                 {message}
               </MDBAlert>

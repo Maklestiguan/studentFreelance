@@ -10,9 +10,9 @@ import { checkJobStatus } from '../../utils';
 const JobStatusFreelancer = props => {
   return (
     <MDBCol className="col-md-8 offset-md-1">
-    <MDBCard>
+    <MDBCard border="default">
       <MDBCardBody>
-        <MDBCardTitle className="my-3 text-center">Ваши отклики</MDBCardTitle>
+        <MDBCardTitle className="my-3 text-center">Ваши отклики в роли наставника</MDBCardTitle>
         <MDBTable hover scrollY="true" striped className="text-center">
           <MDBTableHead color="primary-color" textWhite>
           <tr>

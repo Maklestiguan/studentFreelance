@@ -94,7 +94,7 @@ const Register = props => {
                 </div>
                 <div className="text-center py-4 mt-3">
                   <MDBBtn className="button-login big-btn" type="submit">
-                    Register
+                    Регистрация
                   </MDBBtn>
                 </div>
                 <p>Уже зарегистрированы? <Link to="/login">Войти</Link></p>

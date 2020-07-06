@@ -85,7 +85,12 @@ const Profile = props => {
             }
             {
               isOwner && job_requests.length === 0 && !formIsVisible &&
-              <MDBCol className="text-center white-back-profile overall-info-jobs" md={9}>У вас нет активных объявлений о поиске Наставника</MDBCol>
+              <MDBCol className="text-center white-back-profile overall-info-jobs offset-md-1" md={8}>
+              <MDBCard>
+                <MDBCardBody className="z-depth-0">У вас нет активных объявлений о поиске Наставника
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
             }
           </MDBRow>
           <MDBRow>
@@ -128,7 +133,12 @@ const Profile = props => {
               }
               {
                 isOwner && taken_jobs.length === 0 && !formIsVisible &&
-                <MDBCol className="text-center white-back-profile overall-info-jobs" md={9}>У вас нет активных объявлений в роли Наставника</MDBCol>
+                <MDBCol className="text-center white-back-profile overall-info-jobs offset-md-1" md={8}>
+                  <MDBCard>
+                    <MDBCardBody className="z-depth-0">У вас нет активных объявлений в роли Наставника
+                    </MDBCardBody>
+                  </MDBCard>
+                </MDBCol>
               }
           </MDBRow>
         </MDBCardBody>
