@@ -21,9 +21,19 @@ import { displayMessage } from './messages';
 import { loadUser } from './auth';
 
 
-export const loadFreelancerList = () => dispatch => {
+export const loadFreelancerList = (technologies, cities, univercities) => dispatch => {
   dispatch({ type: FREELANCER_LIST_LOADING });
-  axios.get(freelancerListUrl)
+  let filterQuery = "";
+  if (technologies && technologies.length) {
+    filterQuery += `?disciplines=${technologies.join('/')}`;
+  }
+  if (cities && cities.length) {
+    filterQuery += `?cities=${cities.join('/')}`;
+  }
+  if (univercities && univercities.length) {
+    filterQuery += `?univercities=${univercities.join('/')}`;
+  }
+  axios.get(filterQuery ? freelancerListUrl + filterQuery : freelancerListUrl)
     .then(response => dispatch({ type: FREELANCER_LIST_LOADED, payload: response.data }))
     .catch(error => {
       dispatch({ type: FREELANCER_LIST_ERROR });
@@ -58,7 +68,6 @@ const headers = {
 export const editProfile = (profile, history) => dispatch => {
   const data = new FormData();
 
-  data.append('username', profile.username);
   data.append('email', profile.email);
   data.append('first_name', profile.first_name);
   data.append('last_name', profile.last_name);
@@ -73,9 +82,9 @@ export const editProfile = (profile, history) => dispatch => {
   if (profile.freelancer) {
     data.append('bio', profile.bio);
     data.append('technologies', profile.technologies);
-    data.append('city', profile.city);
-    data.append('univercity', profile.univercity)
-    // data.append('hour_rate', profile.hour_rate)
+    data.append('cities', profile.cities);
+    data.append('univercities', profile.univercity)
+    data.append('hour_rate', profile.hour_rate)
   }
   axios.put(profileDetailEditDeleteUrl(profile.id), data, headers)
     .then(response => {
@@ -140,7 +149,7 @@ export const hireFreelancer = (freelancer_id, job_id) => dispatch => {
   axios.get(hireFreelancerUrl(freelancer_id, job_id), addToken())
     .then(response => dispatch({ type: PROFILE_LOADED, payload: response.data }))
     .catch(error => {
-      dispatch(displayMessage('danger', error.response.data));
+      dispatch(displayMessage('danger', "Unable to process this operation" /*error.response.data*/));
       console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };

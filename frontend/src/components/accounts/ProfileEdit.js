@@ -25,8 +25,9 @@ const ProfileEdit = props => {
     time_zone: '',
     bio: '',
     technologies: [],
-    city: '',
-    univercity: '',
+    city: [],
+    univercity: [],
+    hour_rate: 0,
     gender: ''
   };
 
@@ -52,6 +53,8 @@ const ProfileEdit = props => {
   };
 
   const prepopulateForm = profile => {
+    console.log("profile")
+    console.log(profile)
     // extract filename from url
     const fileName = profile.photo.split('/').pop();
     // fetch image file
@@ -70,11 +73,12 @@ const ProfileEdit = props => {
           photoFile: photoFile,
           photoUrl: profile.photo,
           social_accounts: profile.social_accounts,
-          time_zone: profile.time_zone,
+          time_zone: profile.time_zone_display,
           bio: profile.freelancer ? profile.freelancer.bio : '',
-          technologies: profile.freelancer ? profile.freelancer.technologies : '',
-          city: profile.city,
-          gender: profile.gender
+          technologies: profile.freelancer ? profile.freelancer.technologies : [],
+          univercity: profile.freelancer ? profile.freelancer.univercities : [],
+          city: profile.freelancer ? profile.freelancer.cities : [],
+          gender: profile.gender_display
         })
       });
   };
@@ -85,7 +89,7 @@ const ProfileEdit = props => {
     }
   }, [props.auth.user]);
 
-  const { id, username, email, first_name, last_name, photoUrl, social_accounts, time_zone, bio, technologies, city, univercity, gender } = state;
+  const { id, username, email, first_name, last_name, photoUrl, social_accounts, time_zone, bio, technologies, city, univercity, hour_rate, gender } = state;
   console.log(state);
   return (
     <MDBRow>
@@ -117,6 +121,7 @@ const ProfileEdit = props => {
                   labelClass="input-font"
                   label="Ваше имя пользователя"
                   group
+                  outline
                   type="text"
                   validate
                   error="wrong"
@@ -129,6 +134,7 @@ const ProfileEdit = props => {
                 labelClass="input-font"
                   label="Ваш email"
                   group
+                  outline
                   type="email"
                   validate
                   error="wrong"
@@ -141,6 +147,7 @@ const ProfileEdit = props => {
                   labelClass="input-font"
                   label="Ваше имя"
                   group
+                  outline
                   type="text"
                   validate
                   error="wrong"
@@ -153,6 +160,7 @@ const ProfileEdit = props => {
                   labelClass="input-font"
                   label="Ваша фамилия"
                   group
+                  outline
                   type="text"
                   validate
                   error="wrong"
@@ -201,8 +209,9 @@ const ProfileEdit = props => {
                   state.freelancer &&
                     <MDBInput
                       labelClass="input-font"
-                      label="Ваш опыт"
+                      label="Детальная информация"
                       group
+                      outline
                       type="textarea"
                       rows="5"
                       validate
@@ -235,6 +244,26 @@ const ProfileEdit = props => {
                 }
                 {
                   state.freelancer &&
+                  <MDBInput
+                    initialState={hour_rate}
+                    label="Стоимость ваших услуг (в долларах США)"
+                    outline
+                    type="number"
+                    name="hour_rate"
+                    value={hour_rate}
+                    onChange={handleChange}
+                    hint="Уточнить в каком формате проводится работа вы можете в форме 'Детальная информация'" 
+                  />
+                }
+                {
+                  state.freelancer &&
+                  <MDBInput
+                    label="Технологии с которыми вы готовы помочь"
+                    disabled
+                  />
+                }
+                {
+                  state.freelancer &&
                     <MultiSelectField
                       initialState={technologies}
                       setState={setState}
@@ -244,8 +273,10 @@ const ProfileEdit = props => {
                 }
               </div>
               <div className="text-center py-4 mt-3">
-                <MDBBtn color="green" type="submit">Сохранить</MDBBtn>
-                <Link to={`profile/${id}`}><MDBBtn color="red">Отмена</MDBBtn></Link>
+                <MDBBtn className="NavBarLink submit-cancel-btn submit-cancel-btn:hover" type="submit">Сохранить</MDBBtn>
+                <Link to={`profile/${id}`}>
+                  <MDBBtn className="NavBarLink submit-cancel-btn submit-cancel-btn:hover">Отмена</MDBBtn>
+                </Link>
               </div>
             </form>
           </MDBCardBody>

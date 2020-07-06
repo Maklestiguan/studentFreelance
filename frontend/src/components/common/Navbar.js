@@ -29,7 +29,7 @@ const Navbar = props => {
             <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to="/freelancers">Наставники</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem>
-            <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to="/jobs">Объявления</MDBNavLink>
+            <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to="/jobs">Ищу наставника</MDBNavLink>
           </MDBNavItem>
           {/* <MDBNavItem>
             <MDBNavLink className="NavBarLink NavBarButton" to="/job-form">Добавить объявление</MDBNavLink>

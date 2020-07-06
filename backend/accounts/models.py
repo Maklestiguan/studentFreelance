@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from multiselectfield import MultiSelectField
-from django.core.validators import MaxValueValidator, MinValueValidator, validate_image_file_extension
+from django.core.validators import MaxValueValidator, MinValueValidator, validate_image_file_extension, MaxLengthValidator
 from upload_validator import FileTypeValidator
 from choices import LANGUAGES, TIME_ZONES, TECHNOLOGIES, UNIVERSITIES, CITIES, GENDERS
 
@@ -34,13 +34,18 @@ class Profile(models.Model):
 
 class Freelancer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    bio = models.TextField()
+    bio = models.TextField(
+        blank=True,
+        validators=[
+        MaxLengthValidator(1000),
+        ]
+    )
     technologies = MultiSelectField(choices=TECHNOLOGIES, blank=True)
     cities = MultiSelectField(choices=CITIES, blank=True)
-    universities = MultiSelectField(choices=UNIVERSITIES, blank=True)
+    univercities = MultiSelectField(choices=UNIVERSITIES, blank=True)
+    hour_rate = models.CharField(max_length=50, blank=True, null=True, default='Не указано')
     stripe_account_id = models.CharField(max_length=50, blank=True, null=True)
     active = models.BooleanField(default=False)
-    hour_rate = models.CharField(max_length=50, blank=True, null=True, default='Не указано')
 
     def __str__(self):
         return f'{self.profile.user} freelancer'
@@ -52,8 +57,26 @@ class Freelancer(models.Model):
         univ = []
         for t in self.technologies:
             tech.append(t)
+
+        if tech:
+            result.append(tech)
+        else:
+            result.append([])
+
         for c in self.cities:
             cts.append(c)
-        for u in self.universities:
+
+        if cts:
+            result.append(cts)
+        else:
+            result.append([])
+
+        for u in self.univercities:
             univ.append(u)
-        return result.append(','.join(tech), ','.join(cts), ','.join(univ))
+
+        if univ:
+            result.append(univ)
+        else:
+            result.append([])
+
+        return result

@@ -73,7 +73,7 @@ const FreelancerList = props => {
         {freelancers.length > 0 && freelancers.map(
           freelancer => <Freelancer key={freelancer.id} freelancer={freelancer} />
         )}
-        <footer className="text-center" style={{ "backgroundColor": "#E5E5E5" }}>asd</footer>
+        <footer className="text-center" style={{ "backgroundColor": "#E5E5E5" }}>XBOCTOB.NET 2020</footer>
       </div>
       {
         isLoading &&

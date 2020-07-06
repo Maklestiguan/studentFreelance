@@ -68,6 +68,7 @@
   font-size: 16px;
   line-height: 24px;
   text-align: center;
+  vertical-align: middle;
   text-transform: none;
 }
 
@@ -82,6 +83,51 @@
   font-style: "Regular"!important;
   font-size: 18px!important;
   color: rgb(255, 255, 255)!important;
+}
+
+.submit-cancel-btn {
+  height: 44px;
+  width: 180px;
+  background: #00BAFF!important;
+  color: white!important;
+  border-radius: 100px!important;
+
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: none;
+}
+
+.submit-cancel-btn:hover {
+  background: white!important;
+  color: #00BAFF!important;
+}
+
+.report-btn {
+  height: 44px;
+  width: 50%;
+  background: #00BAFF!important;
+  color: white!important;
+  border-radius: 10px!important;
+
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  margin-left: 25%!important;
+  margin-bottom: 10px;
+  font-size: 16px!important;
+  line-height: 24px!important;
+  align-self: center;
+  vertical-align: middle;
+  text-transform: none;
+}
+
+.report-btn:hover {
+  background: red!important;
+  color: white!important;
 }
 
 .PromotionText {

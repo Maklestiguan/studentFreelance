@@ -49,7 +49,7 @@ const JobDetail = props => {
         {
           jobHasLoaded && auth.isAuthenticated && !isOwner && !isAccepted && auth.user.is_freelancer &&
             <>
-              <MDBBtn size="bg" color={hasApplied ? 'deep-orange' : 'primary'} onClick={() => props.applyForJob(id)}>
+              <MDBBtn size="bg" color={hasApplied ? 'red' : 'success'} onClick={() => props.applyForJob(id)}>
                 {hasApplied ? 'Отозвать отклик' : 'Откликнуться'}
               </MDBBtn>
             </>
@@ -70,10 +70,11 @@ const JobDetail = props => {
           {
             freelancer &&
               <div>
-                <h5>Наставник: </h5>
+                <h5>
                 <Link to={`/profile/${freelancer.id}`}>
-                  {freelancer.first_name} {freelancer.last_name}
+                  Наставник: {freelancer.username}
                 </Link>
+                </h5>
                 {isOwner &&
                   <React.Fragment>
                     {paymentVisible ?

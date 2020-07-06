@@ -26,6 +26,7 @@
   font-weight: 800;
   font-style: bold;
   text-align: center;
+  color: #0AB7FF;
 }
 
 .button-login {
@@ -37,12 +38,39 @@
 
   font-family: "Montserrat", sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 28px;
+  font-weight: 600;
+  font-size: 22px!important;
+  line-height: 22px!important;
   text-align: center;
   text-transform: none;
   color: #00BAFF;
+}
+
+.button-login:hover {
+  background: #00BAFF!important;
+  color: white;
+}
+
+.button-register {
+  height: 60px;
+  width: 360px;
+  border: 2px solid #00BAFF!important;
+  background: white!important;
+  border-radius: 100px!important;
+
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px!important;
+  line-height: 22px!important;
+  text-align: center;
+  text-transform: none;
+  color: #00BAFF;
+}
+
+.button-register:hover {
+  background: #00BAFF!important;
+  color: white;
 }
 
 .small-btn {
@@ -86,8 +114,9 @@
 
 .not-frilancer-btn {
   /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.35); */
-  background: rgb(8, 151, 202)!important;
+  background: #00BAFF!important;
   border-radius: 100px!important;
+  width: 300px;
 
   font-family: "Montserrat", sans-serif;
   font-style: bold;
@@ -97,6 +126,10 @@
   text-align: center;
   text-transform: none;
   color: #FFFFFF;
+}
+
+.not-frilancer-btn:hover {
+  background: red!important;
 }
 
 .find-by-filter-btn {
@@ -136,6 +169,8 @@
 .white-back-profile {
   background-clip: content-box;
   background-color: white;
+  margin-bottom: 25px;
+  /* border-radius: 10px!important; */
 }
 
 .overall-info {
@@ -154,7 +189,7 @@
   line-height: 18px;
   color: grey;
   padding-bottom: 10px;
-  vertical-align: middle;
+  text-align: center;
 }
 
 .tableFixHead { overflow-y: auto; height: 100px; }

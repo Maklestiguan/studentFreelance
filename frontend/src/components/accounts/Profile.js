@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBRow } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBRow, MDBNavItem, MDBNavLink, MDBCardText } from 'mdbreact';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -45,12 +45,17 @@ const Profile = props => {
     isFreelancer = true
   }
 
-  // check if used has been hired
-  const isHired = taken_jobs && !!taken_jobs.filter(job => job.id === job_id).length;
+  // check if user has been hired
+  const isHired = taken_jobs ? taken_jobs.length && !!taken_jobs.filter(job => job.id === job_id).length : false;
   const hireButton = (
-      <MDBBtn color={isHired ? 'deep-orange' : 'primary'} className="mt-2 btn-block" onClick={() => props.hireFreelancer(id, job_id)}>
-        {isHired ? 'Нанят (нажмите для отказа от наставника)' : 'Нанять сейчас'}
+    auth.isAuthenticated &&
+      <MDBBtn color={isHired ? 'red' : 'success'} className="mt-2 btn-block" onClick={() => props.hireFreelancer(id, job_id)}>
+        { isHired ? 'Нанят (нажмите для отказа от наставника)' : 'Нанять сейчас'}
       </MDBBtn>
+  );
+  const reportButton = (
+    auth.isAuthenticated &&
+    <MDBNavLink className="NavBarLink report-btn report-btn:hover" to="/jobs/support">Пожаловаться</MDBNavLink>
   );
 
   return (
@@ -64,23 +69,28 @@ const Profile = props => {
             </div>
         } */}
         <MDBCardTitle className="mt-3 text-center">
-          {user && user.first_name} {user && user.last_name} {isOwner && isFreelancer && '(Вы являетесь наставником)'}
         </MDBCardTitle>
         <MDBCardBody>
           <MDBRow>
-            <MDBCol className="text-center white-back-profile" md={3}>
+            <MDBCol className="text-center white-back-profile overall-info" md={3}>
+              <p style={{"fontSize": "24px", "lineHeight": "24px"}}> {user && (user.first_name || user.last_name) ? `${user.first_name} ${user.last_name}` : user && user.username ? user.username : ""} </p>
               <img src={photo} style={{"margin-bottom": "10px"}} className="img-fluid rounded" />
               {!isOwner && isFreelancer && hireButton}
+              {!isOwner && isFreelancer && reportButton}
+              {isOwner && isFreelancer && <p>(Вы являетесь наставником)</p>}
               {
                 isOwner &&
                   <div>
-                    <Link className="text-center profile-link" to="/profile-edit">Редактировать профиль</Link><br/>
+                    <Link className="profile-link" to="/profile-edit">Редактировать профиль</Link><br/>
+                    <Link className="profile-link" to="/profile-edit">Мои объявления</Link><br/>
+                    <Link className="profile-link" to="/profile-edit">Мои сообщения</Link><br/>
+                    <Link className="profile-link" to="/profile-edit">Мои отзывы</Link><br/>
                   </div>
               }
             </MDBCol>
             {formIsVisible && <FreelancerForm setFormIsVisible={setFormIsVisible} />}
             {
-              isOwner && job_requests.length > 0 &&
+              isOwner && job_requests.length > 0 && !formIsVisible &&
                 <JobStatusClient jobs={job_requests} />
             }
             {
@@ -92,6 +102,13 @@ const Profile = props => {
               </MDBCard>
             </MDBCol>
             }
+            {
+              !isOwner && !formIsVisible && 
+              <MDBCol className="text-left white-back-profile overall-info" md={9}>
+                <MDBCardTitle>Детальная информация</MDBCardTitle><br/>
+                <MDBCardText style={{"fontSize": "18px"}}>{freelancer ? freelancer.bio : 'Не указано'}</MDBCardText>
+              </MDBCol>
+            }
           </MDBRow>
           <MDBRow>
             <MDBCol className="text-center white-back-profile overall-info" md={3}>
@@ -102,8 +119,6 @@ const Profile = props => {
                 <br />
                 <div>Город: {city_display}</div>
                 <br />
-                {/* <div>Языки: {languages_display}</div>
-                <br /> */}
                 {
                   isOwner && isFreelancer &&
                     <>
@@ -111,8 +126,6 @@ const Profile = props => {
                       <br /> */}
                       {/* <div>Hour rate: {freelancer.hour_rate}</div>
                       <br /> */}
-                      <div>Дисциплины: {freelancer.technologies_display}</div>
-                      <br/>
                     </>
                 }
                 {
@@ -128,8 +141,8 @@ const Profile = props => {
                 {isOwner && isFreelancer && <UnbecomeFreelancerButton className="not-frilancer-btn" />}
             </MDBCol>
               {
-                isOwner && taken_jobs.length > 0 &&
-                  <JobStatusFreelancer username={auth.user.username} jobs={taken_jobs} />
+                isOwner && taken_jobs.length > 0 && !formIsVisible &&
+                  <JobStatusFreelancer id={auth.user.id} jobs={taken_jobs} />
               }
               {
                 isOwner && taken_jobs.length === 0 && !formIsVisible &&
@@ -140,6 +153,28 @@ const Profile = props => {
                   </MDBCard>
                 </MDBCol>
               }
+          </MDBRow>
+          <MDBRow>
+            <MDBCol className="text-center white-back-profile overall-info" md={3}>
+              {
+                isFreelancer &&
+                  <>
+                    {/* <div>Ваши навыки: {freelancer.bio}</div>
+                    <br /> */}
+                    {/* <div>Hour rate: {freelancer.hour_rate}</div>
+                    <br /> */}
+                    <p style={{"fontWeight": "800"}}>
+                      Дисциплины: 
+                      <br/>
+                    </p>
+                    {
+                      freelancer.technologies_display
+                        .split(',')
+                        .map(el => <p style={{"paddingLeft": "15px", "textAlign": "left"}}>{el}</p>)
+                    }
+                  </>
+              }
+            </MDBCol>
           </MDBRow>
         </MDBCardBody>
       </MDBCard>

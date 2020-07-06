@@ -8,6 +8,7 @@ import { checkJobStatus } from '../../utils';
 
 
 const JobStatusFreelancer = props => {
+  console.log(props)
   return (
     <MDBCol className="col-md-8 offset-md-1">
     <MDBCard border="default">
@@ -18,7 +19,7 @@ const JobStatusFreelancer = props => {
           <tr>
             <th>#</th>
             <th>Объявление</th>
-            {/* <th>Откликнулись</th> */}
+            <th>Откликнулись</th>
             <th>Выбраны наставником</th>
             <th>Завершено</th>
           </tr>
@@ -30,11 +31,11 @@ const JobStatusFreelancer = props => {
                   <tr key={job.id}>
                     <th>{index + 1}</th>
                     <th><Link to={`/jobs/${job.id}`} className="text-primary">{truncateCharacters(job.summary, 20)}</Link></th>
-                    {/* <th>
-                      {checkJobStatus(true)}
-                    </th> */}
                     <th>
-                      {checkJobStatus(job.freelancer.username === props.username)}
+                      {checkJobStatus(job.applicants.some(el => el.id === props.id))}
+                    </th>
+                    <th>
+                      {checkJobStatus(job.freelancer.id === props.id)}
                     </th>
                     <th>
                       {checkJobStatus(job.done)}

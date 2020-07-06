@@ -31,7 +31,7 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
             raise ValidationError("This file's size is more than 5mb")
 
         user = request.user
-        user.username = data.get('username', user.username)
+        # user.username = user.username
         user.email = data.get('email', user.email)
         user.first_name = data.get('first_name', user.first_name)
         user.last_name = data.get('last_name', user.last_name)
@@ -42,14 +42,16 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
         profile.social_accounts = data.get('social_accounts', profile.social_accounts)
         profile.time_zone = data.get('time_zone', profile.time_zone)
         profile.languages = data.get('languages', profile.languages)
-        profile.city = data.get('city', profile.city)
-        profile.age = data.get('age', profile.age)
+        # profile.city = data.get('city', profile.city)
+        # profile.age = data.get('age', profile.age)
         profile.gender = data.get('gender', profile.gender)
         profile.save()
 
         if hasattr(profile, 'freelancer'):
             profile.freelancer.bio = data.get('bio', profile.freelancer.bio)
             profile.freelancer.technologies = data.get('technologies', profile.freelancer.technologies)
+            profile.freelancer.cities = data.get('cities', profile.freelancer.cities)
+            profile.freelancer.univercities = data.get('univercities', profile.freelancer.univercities)
             profile.freelancer.hour_rate = data.get('hour_rate', profile.freelancer.hour_rate)
             profile.freelancer.save()
 
@@ -61,7 +63,36 @@ class FreelancerListView(generics.ListAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        return Profile.objects.filter(freelancer__isnull=False)
+        profiles = Profile.objects.filter(freelancer__isnull=False)
+        disciplines = self.request.query_params.get('disciplines', None)
+        cities = self.request.query_params.get('cities', None)
+        univercities = self.request.query_params.get('univercities', None)
+
+
+        if disciplines is None and cities is None and univercities is None:
+            return profiles
+        else:
+            results = []
+            for profile in profiles:
+                fields = profile.freelancer.__getFilteredFields__()
+                to_be_added = True
+
+                if disciplines is not None:
+                    if not any(d in fields[0] for d in disciplines.split('/')):
+                        to_be_added = False
+
+                if cities is not None and to_be_added:
+                    if not any(c in fields[1] for c in cities.split('/')):
+                        to_be_added = False
+
+                if univercities is not None and to_be_added:
+                    if not any(u in fields[2] for u in univercities.split('/')):
+                        to_be_added = False
+
+                if to_be_added:
+                    results.append(profile)
+
+            return list(set(results))
 
 
 class BecomeFreelancerView(generics.GenericAPIView):

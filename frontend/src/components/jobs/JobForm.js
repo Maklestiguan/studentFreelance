@@ -64,9 +64,16 @@ const JobForm = props => {
           <MDBCard className="mt-5">
             <MDBCardBody>
               <form onSubmit={handleSubmit}>
-                <p className="h4 text-center mb-4">
-                  {job ? 'Изменение объявления' : 'Создание объвления'}
+                <p style={{"color": "#144573"}} className="h4 text-center mb-4">
+                  {job ? 'Изменение объявления' : 'Подача объявления'}
                 </p>
+                <MultiSelectField
+                  initialState={technologies}
+                  setState={setState}
+                  url={technologyListUrl}
+                  fieldName="technologies"
+                  label="Предметы с которыми вам нужна помощь"
+                />
                 <MDBInput
                   label="Краткое описание"
                   outline
@@ -83,12 +90,13 @@ const JobForm = props => {
                   value={details}
                   onChange={handleChange}
                 />
-                <MultiSelectField
-                  initialState={technologies}
-                  setState={setState}
-                  url={technologyListUrl}
-                  fieldName="technologies"
-                  label="Предметы с которыми вам нужна помощь"
+                <MDBInput
+                  label="Бюджет в американских долларах (USD)"
+                  outline
+                  type="number"
+                  name="budget"
+                  value={budget}
+                  onChange={handleChange}
                 />
                 <MDBInput
                   label="Срок завершения работы"
@@ -99,16 +107,8 @@ const JobForm = props => {
                   onChange={handleChange}
                   className="mt-5"
                 />
-                <MDBInput
-                  label="Бюджет в американских долларах (USD)"
-                  outline
-                  type="number"
-                  name="budget"
-                  value={budget}
-                  onChange={handleChange}
-                />
                 <div className="text-center mt-4">
-                  <MDBBtn className="job-confirm-btn" color="cyan" outline type="submit">
+                  <MDBBtn className="job-confirm-btn z-depth-0" color="cyan" outline type="submit">
                     Разместить объявление
                   </MDBBtn>
                 </div>

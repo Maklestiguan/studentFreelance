@@ -13,24 +13,25 @@ const Freelancer = props => {
       style={{
         "marginBottom": "20px"
         }}>
+        <Link to={`/profile/${id}`}>
+        <MDBCardTitle className="text-left">{user.first_name && user.last_name ? `${user.first_name} ${user.last_name}` : `${user.username}` }
+            <img className="rounded float-left"  src={photo} alt="Unable to load" height="180" width="180" waves/>
+        </MDBCardTitle>
         <MDBCardBody
           border="default" 
-          className="position-relative z-depth-0">
-          <MDBCardTitle className="text-left">{user.first_name} {user.last_name}
-          </MDBCardTitle>
-          <Link to={`/profile/${id}`}>
-            <img className="rounded float-left"  src={photo} alt="Unable to load" height="125" width="125" waves/>
-          </Link>
+          className="position-relative z-depth-0"
+        >
           <MDBCardText className="freelancers-list-item">
             {freelancer.bio}
           </MDBCardText>
           <MDBCardText className="freelancers-list-cost-item">
-            {freelancer.hour_rate}
+            {freelancer.hour_rate}$
           </MDBCardText>
           <MDBCardText className="freelancers-list-item">
             {freelancer.technologies_display}
           </MDBCardText>
         </MDBCardBody>
+        </Link>
       </MDBCard>
     </>
   )

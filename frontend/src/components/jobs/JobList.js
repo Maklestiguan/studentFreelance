@@ -78,7 +78,7 @@ const JobList = props => {
         {jobs.length > 0 && jobs.map(
           job => <Job key={job.id} job={job} />
         )}
-        <footer className="text-center" style={{ "backgroundColor": "#E5E5E5" }}>asd</footer>
+        <footer className="text-center" style={{ "backgroundColor": "#E5E5E5" }}>XBOCTOB.NET 2020</footer>
       </div>
       {
         isLoading &&

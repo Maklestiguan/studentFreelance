@@ -24,6 +24,7 @@ class JobSerializer(serializers.ModelSerializer):
                 'id': a.id,
                 'first_name': a.first_name,
                 'last_name': a.last_name,
+                'username': a.username
             }
             applicants.append(applicant)
         return applicants

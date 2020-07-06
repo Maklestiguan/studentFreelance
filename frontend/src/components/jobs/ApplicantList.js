@@ -13,7 +13,7 @@ const ApplicantList = props => {
             return (
               <div key={applicant.id}>
                 <Link to={{ pathname: `/profile/${applicant.id}`, job_id: props.job_id }}>
-                  {applicant.first_name} {applicant.last_name}
+                  {applicant.username}
                 </Link>
               </div>
             )
