@@ -4,14 +4,13 @@ from rest_framework import status
 from rest_framework import views
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, ValidationError
 
 from choices import LANGUAGES, TECHNOLOGIES, TIME_ZONES, CITIES, AGES, GENDERS, UNIVERSITIES
 from jobs.models import Job
 from jobs.permissions import IsOwnerOrReadOnly, IsOwner
 from .models import Profile, Freelancer
 from .serializers import UserSerializer, ProfileSerializer
-
 
 class UserView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
@@ -28,6 +27,9 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
 
     def put(self, request, *args, **kwargs):
         data = request.data
+        if data.get('photo').size > 5242880:
+            raise ValidationError("This file's size is more than 5mb")
+
         user = request.user
         user.username = data.get('username', user.username)
         user.email = data.get('email', user.email)

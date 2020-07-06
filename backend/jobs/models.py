@@ -13,7 +13,7 @@ class Job(models.Model):
     freelancer = models.ForeignKey(User, related_name='jobs', blank=True, null=True, on_delete=models.SET_NULL)
     summary = models.CharField(max_length=50)
     details = models.TextField()
-    technologies = MultiSelectField(choices=TECHNOLOGIES, blank=True)
+    technologies = MultiSelectField(choices=TECHNOLOGIES)
     cities = MultiSelectField(choices=CITIES, blank=True)
     universities = MultiSelectField(choices=UNIVERSITIES, blank=True)
     deadline = models.DateField()

@@ -3,8 +3,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from multiselectfield import MultiSelectField
-from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.core.validators import MaxValueValidator, MinValueValidator, validate_image_file_extension
+from upload_validator import FileTypeValidator
 from choices import LANGUAGES, TIME_ZONES, TECHNOLOGIES, UNIVERSITIES, CITIES, GENDERS
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
