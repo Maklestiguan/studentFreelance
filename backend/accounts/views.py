@@ -23,7 +23,7 @@ class UserView(generics.RetrieveAPIView):
 class ProfileView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
 
     def put(self, request, *args, **kwargs):
         data = request.data
@@ -39,6 +39,8 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
 
         profile = user.profile
         profile.photo = data.get('photo', profile.photo)
+        if len(data.get('social_accounts', profile.social_accounts)) > 100:
+            raise ValidationError("No more than 100 characters")
         profile.social_accounts = data.get('social_accounts', profile.social_accounts)
         profile.time_zone = data.get('time_zone', profile.time_zone)
         profile.languages = data.get('languages', profile.languages)
@@ -48,6 +50,8 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
         profile.save()
 
         if hasattr(profile, 'freelancer'):
+            if len(data.get('bio', profile.freelancer.bio)) > 1000:
+                raise ValidationError("No more than 1000 characters")
             profile.freelancer.bio = data.get('bio', profile.freelancer.bio)
             profile.freelancer.technologies = data.get('technologies', profile.freelancer.technologies)
             profile.freelancer.cities = data.get('cities', profile.freelancer.cities)

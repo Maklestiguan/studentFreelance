@@ -41,7 +41,7 @@ const Navbar = props => {
                   <MDBNavLink className="NavBarLink NavBarButton NavBarButton:hover" to={`/profile/${user.id}`}>Личный кабинет</MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <MDBNavLink className="NavBarLink NavBarButton" to="#!" onClick={() => props.logout()}>Выйти</MDBNavLink>
+                  <MDBNavLink className="NavBarLink NavBarButton" to="/login" onClick={() => props.logout()}>Выйти</MDBNavLink>
                 </MDBNavItem>
               </>
             :

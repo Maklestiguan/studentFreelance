@@ -6,8 +6,9 @@ import { useLocation } from 'react-router-dom';
 
 import { addJob, editJob } from '../../actions/jobs';
 import { displayMessage } from '../../actions/messages';
-import { technologyListUrl } from '../../endpoints';
+import { technologyListUrl, univercityListUrl, cityListUrl } from '../../endpoints';
 import MultiSelectField from '../common/MultiSelectField';
+import SelectField from '../common/SelectField';
 
 
 const JobForm = props => {
@@ -16,7 +17,9 @@ const JobForm = props => {
     details: '',
     technologies: [],
     deadline: '',
-    budget: ''
+    budget: '',
+    city: '',
+    univercity: ''
   };
 
   const [state, setState] = useReducer((state, updatedState) => ({...state, ...updatedState}), initialState);
@@ -30,7 +33,9 @@ const JobForm = props => {
         details: job.details,
         technologies: job.technologies,
         deadline: job.deadline,
-        budget: job.budget
+        budget: job.budget,
+        city: job.city,
+        univercity: job.univercity
       })
     }
   }, [job]);
@@ -46,7 +51,7 @@ const JobForm = props => {
       props.displayMessage('danger', 'Неверная дата завершения работ')
     } else if (state.budget < 1) {
       props.displayMessage('danger', "Некорректная сумма оплаты")
-    } else if (state.technologies.length < 0) {
+    } else if (state.technologies.length <= 0) {
       props.displayMessage('danger', "Выберите по меньшей мере одну дисциплину")
     } else if (job) {
         props.editJob(job.id, state, props.history);
@@ -55,7 +60,7 @@ const JobForm = props => {
       }
   };
 
-  const { summary, details, technologies, deadline, budget } = state;
+  const { summary, details, technologies, deadline, budget, city, univercity } = state;
 
   return (
     <MDBContainer>
@@ -73,6 +78,22 @@ const JobForm = props => {
                   url={technologyListUrl}
                   fieldName="technologies"
                   label="Предметы с которыми вам нужна помощь"
+                />
+                <SelectField
+                  labelClass="input-font"
+                  label="Укажите город (опционально)"
+                  initialState={city}
+                  setState={setState}
+                  url={cityListUrl}
+                  fieldName="city"
+                />
+                <SelectField
+                  labelClass="input-font"
+                  label="Укажите университет (опционально)"
+                  initialState={univercity}
+                  setState={setState}
+                  url={univercityListUrl}
+                  fieldName="univercity"
                 />
                 <MDBInput
                   label="Краткое описание"

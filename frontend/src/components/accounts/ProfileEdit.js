@@ -25,8 +25,8 @@ const ProfileEdit = props => {
     time_zone: '',
     bio: '',
     technologies: [],
-    city: [],
-    univercity: [],
+    cities: [],
+    univercities: [],
     hour_rate: 0,
     gender: ''
   };
@@ -75,9 +75,9 @@ const ProfileEdit = props => {
           social_accounts: profile.social_accounts,
           time_zone: profile.time_zone_display,
           bio: profile.freelancer ? profile.freelancer.bio : '',
-          technologies: profile.freelancer ? profile.freelancer.technologies : [],
-          univercity: profile.freelancer ? profile.freelancer.univercities : [],
-          city: profile.freelancer ? profile.freelancer.cities : [],
+          technologies: profile.freelancer ? profile.freelancer.technologies_display : [],
+          univercities: profile.freelancer ? profile.freelancer.univercities_display : [],
+          cities: profile.freelancer ? profile.freelancer.cities_display : [],
           gender: profile.gender_display
         })
       });
@@ -89,7 +89,7 @@ const ProfileEdit = props => {
     }
   }, [props.auth.user]);
 
-  const { id, username, email, first_name, last_name, photoUrl, social_accounts, time_zone, bio, technologies, city, univercity, hour_rate, gender } = state;
+  const { id, username, email, first_name, last_name, photoUrl, social_accounts, time_zone, bio, technologies, cities, univercities, hour_rate, gender } = state;
   console.log(state);
   return (
     <MDBRow>
@@ -171,14 +171,6 @@ const ProfileEdit = props => {
                 />
                 <SelectField
                   labelClass="input-font"
-                  label="Ваш город"
-                  initialState={city}
-                  setState={setState}
-                  url={cityListUrl}
-                  fieldName="city"
-                />
-                <SelectField
-                  labelClass="input-font"
                   label="Ваш пол"
                   initialState={gender}
                   setState={setState}
@@ -225,20 +217,20 @@ const ProfileEdit = props => {
                 {
                   state.freelancer &&
                   <SelectField
-                    initialState={city}
+                    initialState={cities}
                     setState={setState}
                     url={cityListUrl}
-                    fieldName="city"
+                    fieldName="cities"
                     label="Ваш город"
                   />
                 }
                 {
                   state.freelancer &&
                   <SelectField
-                    initialState={univercity}
+                    initialState={univercities}
                     setState={setState}
                     url={univercityListUrl}
-                    fieldName="univercity"
+                    fieldName="univercities"
                     label="Ваш ВУЗ"
                   />
                 }

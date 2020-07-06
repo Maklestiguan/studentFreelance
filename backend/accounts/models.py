@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from multiselectfield import MultiSelectField
 from django.core.validators import MaxValueValidator, MinValueValidator, validate_image_file_extension, MaxLengthValidator
-from upload_validator import FileTypeValidator
 from choices import LANGUAGES, TIME_ZONES, TECHNOLOGIES, UNIVERSITIES, CITIES, GENDERS
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -25,7 +24,7 @@ class Profile(models.Model):
         ]
     )
     gender = models.CharField(max_length=25, choices=GENDERS, blank=True, null=True, default='Не указано')
-    university = models.CharField(max_length=25, choices=UNIVERSITIES, blank=True, default='Не указано')
+    univercity = models.CharField(max_length=25, choices=UNIVERSITIES, blank=True, default='Не указано')
     stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
@@ -36,6 +35,7 @@ class Freelancer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     bio = models.TextField(
         blank=True,
+        max_length=1000,
         validators=[
         MaxLengthValidator(1000),
         ]
@@ -43,7 +43,7 @@ class Freelancer(models.Model):
     technologies = MultiSelectField(choices=TECHNOLOGIES, blank=True)
     cities = MultiSelectField(choices=CITIES, blank=True)
     univercities = MultiSelectField(choices=UNIVERSITIES, blank=True)
-    hour_rate = models.CharField(max_length=50, blank=True, null=True, default='Не указано')
+    hour_rate = models.CharField(max_length=50, blank=True, null=True, default='0')
     stripe_account_id = models.CharField(max_length=50, blank=True, null=True)
     active = models.BooleanField(default=False)
 

@@ -28,8 +28,7 @@ const Profile = props => {
   const [formIsVisible, setFormIsVisible] = useState(false);
 
   const { auth } = props;
-  const { user, freelancer, job_requests, taken_jobs, photo, social_accounts, time_zone_display, languages_display, city_display, age_display, gender_display } = props.profile.profile;
-
+  const { user, freelancer, job_requests, taken_jobs, photo, social_accounts, time_zone_display, cities_display, gender_display } = props.profile.profile;
   let isOwner;
 
   if (Object.keys(auth.user).length && user) {
@@ -82,9 +81,9 @@ const Profile = props => {
                 isOwner &&
                   <div>
                     <Link className="profile-link" to="/profile-edit">Редактировать профиль</Link><br/>
-                    <Link className="profile-link" to="/profile-edit">Мои объявления</Link><br/>
-                    <Link className="profile-link" to="/profile-edit">Мои сообщения</Link><br/>
-                    <Link className="profile-link" to="/profile-edit">Мои отзывы</Link><br/>
+                    {/* <Link className="profile-link" to="/profile-edit">Мои объявления (не реализовано)</Link><br/> */}
+                    <Link className="profile-link" to="/jobs">Сообщения (не реализовано)</Link><br/>
+                    <Link className="profile-link" to="/jobs">Отзывы (не реализовано)</Link><br/>
                   </div>
               }
             </MDBCol>
@@ -113,21 +112,12 @@ const Profile = props => {
           <MDBRow>
             <MDBCol className="text-center white-back-profile overall-info" md={3}>
                 <br />
-                <div>Пол: {gender_display}</div>
+                <div>Пол: {gender_display ? gender_display : "Не указано"}</div>
                 <br />
-                <div>Возраст: {age_display ? age_display : "Не указано"}</div>
+                <div>Город: {freelancer ? freelancer.cities_display : "Не указано"}</div>
                 <br />
-                <div>Город: {city_display}</div>
+                <div>Стоимость услуг: {freelancer ? `${freelancer.hour_rate}$` : "Не указано"}</div>
                 <br />
-                {
-                  isOwner && isFreelancer &&
-                    <>
-                      {/* <div>Ваши навыки: {freelancer.bio}</div>
-                      <br /> */}
-                      {/* <div>Hour rate: {freelancer.hour_rate}</div>
-                      <br /> */}
-                    </>
-                }
                 {
                   isOwner && !isFreelancer &&
                     <MDBBtn

@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from multiselectfield import MultiSelectField
-
+from django.core.validators import MaxLengthValidator
 from choices import TECHNOLOGIES, CITIES, UNIVERSITIES
 
 User = get_user_model()
@@ -12,7 +12,11 @@ class Job(models.Model):
     applicants = models.ManyToManyField(User, related_name='applications', blank=True)
     freelancer = models.ForeignKey(User, related_name='jobs', blank=True, null=True, on_delete=models.SET_NULL)
     summary = models.CharField(max_length=50)
-    details = models.TextField()
+    details = models.TextField(blank=True,
+        max_length=1000,
+        validators=[
+        MaxLengthValidator(1000),
+        ])
     technologies = MultiSelectField(choices=TECHNOLOGIES)
     cities = MultiSelectField(choices=CITIES, blank=True)
     universities = MultiSelectField(choices=UNIVERSITIES, blank=True)

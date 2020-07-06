@@ -76,17 +76,16 @@ export const editProfile = (profile, history) => dispatch => {
   data.append('social_accounts', profile.social_accounts);
   data.append('time_zone', profile.time_zone);
   data.append('languages', profile.languages);
-  // data.append('city', profile.city);
   data.append('gender', profile.gender);
 
   if (profile.freelancer) {
     data.append('bio', profile.bio);
     data.append('technologies', profile.technologies);
-    data.append('cities', profile.cities);
-    data.append('univercities', profile.univercity)
+    if (profile.cities) data.append('cities', profile.cities);
+    if (profile.univercities) data.append('univercities', profile.univercity)
     data.append('hour_rate', profile.hour_rate)
   }
-  axios.put(profileDetailEditDeleteUrl(profile.id), data, headers)
+  axios.put(profileDetailEditDeleteUrl(profile.id), data, addToken())
     .then(response => {
       dispatch({ type: PROFILE_LOADED, payload: response.data });
       loadUser(dispatch);

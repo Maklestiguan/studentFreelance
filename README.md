@@ -1,18 +1,19 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Подготовка 
+1) Установить node.js и npm
+2) Установить python3 и pip3
 
-## Available Scripts
+### Развернуть фронт
+3.1) В директории `/frontend` сделать `npm install`
 
-In the project directory, you can run:
+3.2) В директории `/frontend` сделать `npm start`
 
-### `python3 manage.py migrate`
-### `python3 manage.py runserver 127.0.0.1:8000`
+### Развернуть бэк
+Ошибки возникают в зависимости от установленной версии python
 
-Runs backend part in the development mode.
+При правильно установке python3 первая команда работает в 100 из 100 случаев
 
-### `npm start`
+4.1) В директории `/backend` сделать `pip3 install -r requirements.txt` либо при ошибке `pip install -r requirements.txt`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4.2) В директории `/backend` сделать `python3 manage.py migrate` либо при ошибке `python manage.py migrate` либо при ошибке `py manage.py migrate`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+4.3) В директории `/backend` сделать `python3 manage.py runserver 127.0.0.1:8000` либо при ошибке `python manage.py runserver 127.0.0.1:8000` либо при ошибке `py manage.py runserver 127.0.0.1:8000`
