@@ -8,7 +8,6 @@ import { checkJobStatus } from '../../utils';
 
 
 const JobStatusFreelancer = props => {
-  console.log(props)
   return (
     <MDBCol className="col-md-8 offset-md-1">
     <MDBCard border="default">

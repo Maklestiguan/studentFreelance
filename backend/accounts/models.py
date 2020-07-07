@@ -41,7 +41,7 @@ class Freelancer(models.Model):
         ]
     )
     technologies = MultiSelectField(choices=TECHNOLOGIES, blank=True)
-    cities = MultiSelectField(choices=CITIES, blank=True)
+    cities = models.CharField(max_length=25, choices=CITIES, blank=True, default='Не указано')
     univercities = MultiSelectField(choices=UNIVERSITIES, blank=True)
     hour_rate = models.CharField(max_length=50, blank=True, null=True, default='0')
     stripe_account_id = models.CharField(max_length=50, blank=True, null=True)

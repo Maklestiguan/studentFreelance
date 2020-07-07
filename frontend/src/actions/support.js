@@ -11,6 +11,6 @@ export const addSupportTicket = data => dispatch => {
       dispatch(displayMessage('success', 'Ваше сообщение успешно отправлено'));
     }).catch(error => {
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     })
 };

@@ -29,7 +29,8 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
         data = request.data
         if data.get('photo').size > 5242880:
             raise ValidationError("This file's size is more than 5mb")
-
+        if not str(data.get('photo')).endswith(('.png', '.jpg', '.jpeg')):
+            raise ValidationError("Unallowed content type")
         user = request.user
         # user.username = user.username
         user.email = data.get('email', user.email)
@@ -56,6 +57,8 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
             profile.freelancer.technologies = data.get('technologies', profile.freelancer.technologies)
             profile.freelancer.cities = data.get('cities', profile.freelancer.cities)
             profile.freelancer.univercities = data.get('univercities', profile.freelancer.univercities)
+            if len(data.get('hour_rate')) > 15:
+                raise ValidationError("No more than 15 characters")
             profile.freelancer.hour_rate = data.get('hour_rate', profile.freelancer.hour_rate)
             profile.freelancer.save()
 

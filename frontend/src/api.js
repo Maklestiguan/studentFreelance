@@ -32,7 +32,7 @@ const getJobDetails = jobID => {
     .get(`${endpoint}payments/job-detail/${jobID}/`, addToken())
     .then(res => {
       if (!res.data || res.data.error) {
-        console.log("API error:", { data: res.data });
+        // console.log("API error:", { data: res.data });
         throw Error("API Error");
       } else {
         return res.data;

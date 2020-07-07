@@ -25,7 +25,7 @@ export const loadUser = dispatch => {
       .then(response => dispatch({ type: USER_LOADED, payload: response.data }))
       .catch(error => {
         dispatch({ type: USER_ERROR });
-        console.log(error)
+        // console.log(error)
       })
 };
 
@@ -56,7 +56,7 @@ export const register = data => dispatch => {
   dispatch({ type: AUTH_START });
   axios.post(registerUrl, data)
     .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       const token = response.data.key;
       const expirationDate = new Date(new Date().getTime() + 360000 * 1000);
       localStorage.setItem('token', token);
@@ -68,7 +68,7 @@ export const register = data => dispatch => {
     .catch(error => {
       dispatch({ type: AUTH_FAIL });
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     })
 };
 
@@ -88,7 +88,7 @@ export const login = data => dispatch => {
     .catch(error => {
       dispatch({ type: AUTH_FAIL });
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     })
 };
 

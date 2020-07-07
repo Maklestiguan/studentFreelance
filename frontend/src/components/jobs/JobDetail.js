@@ -30,8 +30,6 @@ const JobDetail = props => {
     if (freelancer && auth.user.username === freelancer.username) isAccepted = true;
     jobHasLoaded = true
   }
-  console.log(props)
-  console.log(jobHasLoaded && auth.isAuthenticated && !isOwner && !isAccepted && auth.user.is_freelancer)
 
   return (
     <MDBCard className="my-5">

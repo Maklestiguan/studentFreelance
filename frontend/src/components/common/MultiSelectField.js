@@ -14,7 +14,7 @@ const MultiSelectField = props => {
 
   useEffect(() => {
     axios.get(url)
-      .then(response => { console.log(convertToOptions(response.data)); setOptions(convertToOptions(response.data)) })
+      .then(response => { setOptions(convertToOptions(response.data)) })
       .catch(error => console.log(`Status: ${error.response.status}`, error.response.data));
     setSelected(initialState)
   }, [initialState]);

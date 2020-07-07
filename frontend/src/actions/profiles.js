@@ -37,7 +37,7 @@ export const loadFreelancerList = (technologies, cities, univercities) => dispat
     .then(response => dispatch({ type: FREELANCER_LIST_LOADED, payload: response.data }))
     .catch(error => {
       dispatch({ type: FREELANCER_LIST_ERROR });
-      console.log(error)
+      dispatch(displayMessage('danger', error.response.data));
     });
 };
 
@@ -52,7 +52,7 @@ export const loadProfile = (id, prepopulateForm) => dispatch => {
     .catch(error => {
       dispatch({ type: PROFILE_ERROR });
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
 
@@ -81,8 +81,8 @@ export const editProfile = (profile, history) => dispatch => {
   if (profile.freelancer) {
     data.append('bio', profile.bio);
     data.append('technologies', profile.technologies);
-    if (profile.cities) data.append('cities', profile.cities);
-    if (profile.univercities) data.append('univercities', profile.univercity)
+    if (!!profile.cities && profile.cities !== "undefined") data.append('cities', profile.cities);
+    if (!!profile.univercities && profile.univercities !== "undefined") data.append('univercities', profile.univercity)
     data.append('hour_rate', profile.hour_rate)
   }
   axios.put(profileDetailEditDeleteUrl(profile.id), data, addToken())
@@ -94,7 +94,8 @@ export const editProfile = (profile, history) => dispatch => {
     .catch(error => {
       dispatch({ type: PROFILE_ERROR });
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      history.push(`/profile/${profile.id}`)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
 
@@ -109,7 +110,7 @@ export const deleteProfile = (id, history) => dispatch => {
     })
     .catch(error => {
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
 
@@ -125,7 +126,7 @@ export const becomeFreelancer = (data, setFormIsVisible) => dispatch => {
     .catch(error => {
       dispatch({ type: PROFILE_ERROR });
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
 
@@ -139,7 +140,7 @@ export const unbecomeFreelancer = () => dispatch => {
     .catch(error => {
       dispatch({ type: PROFILE_ERROR });
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
 
@@ -149,7 +150,7 @@ export const hireFreelancer = (freelancer_id, job_id) => dispatch => {
     .then(response => dispatch({ type: PROFILE_LOADED, payload: response.data }))
     .catch(error => {
       dispatch(displayMessage('danger', "Unable to process this operation" /*error.response.data*/));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
 

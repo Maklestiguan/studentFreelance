@@ -27,7 +27,7 @@ const Messages = props => {
         message = `${key}: ${value}`;
         messages.push(message)
       }
-      console.log(messages);
+      // console.log(messages);
     }
   }
 

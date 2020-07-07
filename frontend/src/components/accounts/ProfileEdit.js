@@ -9,7 +9,7 @@ import { loadProfile, editProfile } from '../../actions/profiles';
 import MultiSelectField from '../common/MultiSelectField';
 import SelectField from '../common/SelectField';
 import { technologyListUrl, timeZoneListUrl, cityListUrl, gendersListUrl, univercityListUrl } from '../../endpoints';
-
+import { displayMessage } from '../../actions/messages';
 
 const ProfileEdit = props => {
   const initialState = {
@@ -39,6 +39,9 @@ const ProfileEdit = props => {
     const { name, value } = e.target;
     if (name === 'photo') {
       const photoFile = e.target.files[0];
+      if (["image/jpeg", "image/png"].indexOf(photoFile.type) < 0) {
+        return;
+      }
       const photoUrl = URL.createObjectURL(photoFile);
       setState({ photoFile, photoUrl })
     } else {
@@ -53,8 +56,6 @@ const ProfileEdit = props => {
   };
 
   const prepopulateForm = profile => {
-    console.log("profile")
-    console.log(profile)
     // extract filename from url
     const fileName = profile.photo.split('/').pop();
     // fetch image file
@@ -75,10 +76,10 @@ const ProfileEdit = props => {
           social_accounts: profile.social_accounts,
           time_zone: profile.time_zone_display,
           bio: profile.freelancer ? profile.freelancer.bio : '',
-          technologies: profile.freelancer ? profile.freelancer.technologies_display : [],
-          univercities: profile.freelancer ? profile.freelancer.univercities_display : [],
-          cities: profile.freelancer ? profile.freelancer.cities_display : [],
-          gender: profile.gender_display
+          technologies: profile.freelancer ? profile.freelancer.technologies : [],
+          univercities: profile.freelancer ? profile.freelancer.univercities : [],
+          cities: profile.freelancer ? profile.freelancer.cities : [],
+          gender: profile.gender
         })
       });
   };
@@ -90,7 +91,6 @@ const ProfileEdit = props => {
   }, [props.auth.user]);
 
   const { id, username, email, first_name, last_name, photoUrl, social_accounts, time_zone, bio, technologies, cities, univercities, hour_rate, gender } = state;
-  console.log(state);
   return (
     <MDBRow>
       <MDBCol md="8" className="offset-md-2">
@@ -106,6 +106,7 @@ const ProfileEdit = props => {
                   <div className="custom-file">
                     <input
                       type="file"
+                      accept='image/*'
                       className="custom-file-input"
                       id="inputGroupFile01"
                       aria-describedby="inputGroupFileAddon01"

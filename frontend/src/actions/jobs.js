@@ -31,7 +31,7 @@ export const loadJobList = (technologies, cities, univercities) => dispatch => {
     .catch(error => {
       dispatch({ type: JOB_LIST_ERROR });
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
 
@@ -43,7 +43,7 @@ export const loadJobDetail = id => dispatch => {
     .catch(error => {
       dispatch({ type: JOB_DETAIL_ERROR });
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
 
@@ -66,7 +66,7 @@ export const editJob = (id, data, history) => dispatch => {
     .then(() => history.push(`/jobs/${id}`))
     .catch(error => {
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
 
@@ -84,6 +84,6 @@ export const applyForJob = id => dispatch => {
     .catch(error => {
       dispatch({ type: JOB_DETAIL_ERROR });
       dispatch(displayMessage('danger', error.response.data));
-      console.log(`Status: ${error.response.status}`, error.response.data)
+      // console.log(`Status: ${error.response.status}`, error.response.data)
     });
 };
